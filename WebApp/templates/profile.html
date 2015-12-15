@@ -1,0 +1,100 @@
+<!-- Profile - BMI & Calories 
+================================================== -->
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1">
+    <div class="bs-component">
+      <div class="modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close btn btn-info btn-sm" ng-click="signout()">
+                  <i class="glyphicon glyphicon-log-out"></i>Sign-out
+              </button>
+              <h4 class="modal-title">Profile - <i>BMI &amp; Calorie Calculator</i></h4>
+            </div>
+            <div class="modal-body col-lg-10 col-lg-offset-1">  
+                <form class="bs-component" data-toggle="validator" role="form" ng-submit="calculate()">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="select" class="col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1 control-label">Sex</label>
+                            <div class="col-md-7 col-lg-7">
+                                <select class="form-control" required data-error="Select sex" ng-model="profile.sex">
+                                    <option value=""></option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>                            
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-12 col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1 control-label">Height</label>
+                            <div class="col-md-4 col-lg-4 col-input">
+                                <input class="form-control" type="text" placeholder="What is your height?" required data-error="Provide your height" pattern="^[0-9]+$" ng-model="profile.height"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <select class="form-control" ng-model="profile.heightUnit" ng-init="profile.heightUnit = profile.heightUnit || 'inches'" ng-change="unitWeightUpdate()">
+                                  <option value="inches" ng-selected="true">Inches</option>
+                                  <option value="centimeters">Centimeters</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-xs-12 col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1 control-label">Weight</label>
+                            <div class="col-md-4 col-lg-4 col-input">
+                                <input class="form-control" type="text" placeholder="What is your weight?" required data-error="Provide your weight" pattern="^[0-9]+$" ng-model="profile.weight"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="col-md-3 col-lg-3">
+                                <select class="form-control" ng-model="profile.weightUnit" ng-init="profile.weightUnit = profile.weightUnit || 'pounds'" ng-change="unitHeightUpdate()">
+                                  <option value="pounds" ng-selected="true">Pounds</option>
+                                  <option value="kilograms">Kilograms</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1 control-label">Age (years)</label>
+                            <div class="col-md-7 col-lg-7">
+                                <input class="form-control" type="text" placeholder="What is your age in year?" required data-error="Provide your age" pattern="^[1-9]+$" ng-model="profile.age"/>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-2 col-md-offset-1 col-lg-2 col-lg-offset-1 control-label">Activities</label>
+                            <div class="col-md-7 col-lg-7">
+                                <select class="form-control" required data-error="Select activity" ng-model="profile.activity"
+                                        ng-init="profile.activity = profile.activity || '1.2'">
+                                    <option value="1">Basal Metobolic Rate (BMR)</option>
+                                    <option value="1.2" ng-selected="true">Sedentary (little or no exercise)</option>
+                                    <option value="1.375">Lightly active (light exercise/sports 1-3 days/week)</option>
+                                    <option value="1.55">Moderatetely active (moderate exercise/sports 3-5 days/week) </option>
+                                    <option value="1.725">Very active (hard exercise/sports 6-7 days a week)</option>
+                                    <option value="1.9">Extra active (very hard exercise/sports & physical job or 2x training) </option>
+                                </select>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer col-lg-10">
+                      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Clear</button>
+                      <button type="submit" class="btn btn-info btn-sm">Submit</button>
+                    </div>
+                </form>        
+            </div>
+            <div class="modal-footer col-lg-12">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="metcs651nutrition" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Henya\\OneDrive\\Documents\\Boston\ University\\MET\ CS651\ A1\ Web\ Development\ with\ \.NET\\Project\\Nutrition\\WebApp\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Henya\\OneDrive\\Documents\\Boston\ University\\MET\ CS651\ A1\ Web\ Development\ with\ \.NET\\Project\\Nutrition\\WebApp\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+</parameters>

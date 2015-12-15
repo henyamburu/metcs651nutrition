@@ -1,0 +1,25 @@
+/*@media(max-width:767px){}
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){}*/
+
+@media (max-width:767px){
+    .col-input{
+        margin-bottom: 5px;
+    }
+}
+
+@media (min-width:768px){
+    .col-input{
+        margin-bottom: 5px;
+    }
+}
+
+div.form-group > span.k-autocomplete{
+    background-color:#ffffff;
+}
+
+/*span.k-autocomplete #inputFood{
+    font-size:14px;
+    padding: 8px, 12px;
+}*/

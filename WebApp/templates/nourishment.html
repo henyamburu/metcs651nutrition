@@ -1,0 +1,235 @@
+<!-- Foods
+================================================== -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h3 id="forms">Foods</h3>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="well bs-component">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Food Details</legend>
+                    <div class="col-lg-5 col-md-5 col-xs-5">
+                        <div class="form-group">
+                            <label for="selectFoodGroups" class="control-label">Food Groups</label>
+                            <select class="form-control" name="selectFoodGroups" id="selectFoodGroups" ng-model="foodGroup"
+                                    ng-options="foodgroup.desc for foodgroup in foodgroups">
+                                <option value="">Select Food Group</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1">
+                        <div class="form-group">
+                            <label for="inputFood" class="control-label">Foods</label>
+                            <input class="form-control" id="inputFood" placeholder="Foods" kendo-auto-complete k-data-source="foods"
+                                   k-options="acOptions" k-ng-model="food" />
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-xs-5">
+                        <div class="form-group">
+                            <label for="selectAmounts" class="control-label">Amounts</label>
+                            <select class="form-control" id="selectAmounts" ng-model="foodamount" ng-options="amount.desc for amount in foodamounts"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-xs-6 col-xs-offset-1">
+                        <div class="form-group">
+                            <label for="selectWeightAmount" class="control-label">Weight Amount</label>
+                            <select class="form-control" id="selectWeightAmount" ng-model="foodweight" ng-options="weight.desc for weight in weights" ng-change="updateAmounts(foodweight)"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="checkMealTimes" class="control-label">Meal Times</label>
+                            <div class="checkbox">
+                                <label ng-repeat="mealTime in mealTimes">
+                                    <input type="checkbox" value="{{mealTime.name}}" ng-model="mealTime.selected">{{mealTime.name}}&nbsp;&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 col-lg-offset-8">
+                            <button class="btn btn-default btn-sm" ng-click="clearFoodDetail()">Clear</button>
+                            <button type="button" class="btn btn-info btn-sm" ng-click="addToGrid()">Add</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!-- Aggregate Calories
+    ================================================== -->
+    <div class="col-lg-6 col-md-6">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Breakfast {{breakfastCals}}
+                        </a>
+                        <span></span>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="row panel panel-default" style="padding: 5px 0; margin: 0 -10px 5px"
+                             ng-repeat="nourishment in nourishments | filter : 'Breakfast' : true">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">{{nourishment.food.desc}}</div>
+                                <div class="col-lg-2 col-md-2"><strong>{{getNourishmentCals(nourishment)}}</strong></div>
+                                <div class="col-lg-4 col-md-4">
+                                    <button type="button" class="btn btn-info btn-xs" ng-click="editBreakfastGripRow(nourishment)"><i class="glyphicon {{nourishment.glyphiconState}}"></i>{{nourishment.editOrSaveState}}</button>
+                                    <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="deleteGripRow(nourishment)"><i class="glyphicon glyphicon-remove"></i>Delete</button>
+                                </div>
+                            </div>
+                            <div class="row panel panel-default" style="padding: 5px 0; margin: 5px;" ng-show="nourishment.showAmount">
+                                <div class="col-lg-2 col-md-2">
+                                    <label class="control-label">Amounts</label>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <input type="text" ng-model="nourishment.amount.value" />
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <button type="button" class="btn btn-default btn-xs" ng-click="cancelGripRowEdit(nourishment)"><i class="glyphicon glyphicon-ban-circle"></i>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Lunch {{lunchCals}}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div class="row panel panel-default" style="padding: 5px 0px 5px 0px; margin:0 -10px 5px; -10px"
+                             ng-repeat="nourishment in nourishments | filter : 'Lunch' : true">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">{{nourishment.food.desc}}</div>
+                                <div class="col-lg-2 col-md-2"><strong>{{getNourishmentCals(nourishment)}}</strong></div>
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="col-lg-4 col-md-4">
+                                        <button type="button" class="btn btn-info btn-xs" ng-click="editLunchGripRow(nourishment)"><i class="glyphicon {{nourishment.glyphiconState}}"></i>{{nourishment.editOrSaveState}}</button>
+                                        <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="deleteGripRow(nourishment)"><i class="glyphicon glyphicon-remove"></i>Delete</button>
+                                    </div>
+                                </div>
+                                <div class="row panel panel-default" style="padding: 5px 0; margin: 5px;" ng-show="nourishment.showAmount">
+                                    <div class="col-lg-2 col-md-2">
+                                        <label class="control-label">Amounts</label>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <input type="text" ng-model="nourishment.amount.value" />
+                                    </div>
+                                    <div class="col-lg-2 col-md-2">
+                                        <button type="button" class="btn btn-default btn-xs" ng-click="cancelGripRowEdit(nourishment)"><i class="glyphicon glyphicon-ban-circle"></i>Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Dinner {{dinnerCals}}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <div class="row panel panel-default" style="padding: 5px 0px 5px 0px; margin:0 -10px 5px; -10px"
+                             ng-repeat="nourishment in nourishments | filter : 'Dinner' : true">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">{{nourishment.food.desc}}</div>
+                                <div class="col-lg-2 col-md-2"><strong>{{getNourishmentCals(nourishment)}}</strong></div>
+                                <div class="col-lg-4 col-md-4">
+                                    <button type="button" class="btn btn-info btn-xs" ng-click="editDinnerGripRow(nourishment)"><i class="glyphicon {{nourishment.glyphiconState}}"></i>{{nourishment.editOrSaveState}}</button>
+                                    <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="deleteGripRow(nourishment)"><i class="glyphicon glyphicon-remove"></i>Delete</button>
+                                </div>
+                            </div>
+                            <div class="row panel panel-default" style="padding: 5px 0; margin: 5px;" ng-show="nourishment.showAmount">
+                                <div class="col-lg-2 col-md-2">
+                                    <label class="control-label">Amounts</label>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <input type="text" ng-model="nourishment.amount.value" />
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <button type="button" class="btn btn-default btn-xs" ng-click="cancelGripRowEdit(nourishment)"><i class="glyphicon glyphicon-ban-circle"></i>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Snack {{snackCals}}
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div class="row panel panel-default" style="padding: 5px 0px 5px 0px; margin:0 -10px 5px; -10px"
+                             ng-repeat="nourishment in nourishments | filter : 'Snack' : true">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">{{nourishment.food.desc}}</div>
+                                <div class="col-lg-2 col-md-2"><strong>{{getNourishmentCals(nourishment)}}</strong></div>
+                                <div class="col-lg-4 col-md-4">
+                                    <button type="button" class="btn btn-info btn-xs" ng-click="editSnackGripRow(nourishment)"><i class="glyphicon {{nourishment.glyphiconState}}"></i>{{nourishment.editOrSaveState}}</button>
+                                    <button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="deleteGripRow(nourishment)"><i class="glyphicon glyphicon-remove"></i>Delete</button>
+                                </div>
+                            </div>
+                            <div class="row panel panel-default" style="padding: 5px 0; margin: 5px;" ng-show="nourishment.showAmount">
+                                <div class="col-lg-2 col-md-2">
+                                    <label class="control-label">Amounts</label>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <input type="text" ng-model="nourishment.amount.value" />
+                                </div>
+                                <div class="col-lg-2 col-md-2">
+                                    <button type="button" class="btn btn-default btn-xs" ng-click="cancelGripRowEdit(nourishment)"><i class="glyphicon glyphicon-ban-circle"></i>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Historical Calories
+================================================== -->
+<div class="row">
+    <div class="well col-lg-12 col-md-12 col-xs-12" ng-show="showGraph">
+        <div class="col-lg-2 col-md-2 col-xs-2">
+            <label class="control-label">Charts</label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-2">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="1daychart" checked>
+                Today's chart
+            </label>
+        </div>
+        <div class="col-lg-2 col-md-2 col-xs-2">
+            <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="7daychart">
+                Last 7 days chart
+            </label>
+        </div>
+    </div>
+    <div id="chart" class="col-lg-12 col-md-12 col-xs-12"></div>
+</div>

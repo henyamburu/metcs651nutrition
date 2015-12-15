@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href="http://demos.telerik.com/kendo-ui/autocomplete/angular">
+    <style>
+        html {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title>Ticket ID: 906308</title>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.dataviz.default.min.css" />
+
+    <script src="http://cdn.kendostatic.com/2014.3.1411/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.3.1411/js/angular.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.3.1411/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div id="example" ng-app="KendoDemos">
+        <div class="demo-section k-content" ng-controller="MyCtrl">
+            <h4>Select Country</h4>
+            <p>Start typing the name of an European country, e.g., Armenia.</p>
+            <input kendo-auto-complete k-ng-model="country" k-data-source="countryNames" k-options="acOptions" style="width: 400px" />
+            <p>Your selection: {{ country }}</p>
+        </div>
+        <style scoped>
+            .demo-section {
+                width: 400px;
+            }
+
+                .demo-section p {
+                    padding: 5px 0;
+                }
+        </style>
+    </div>
+
+    <script>
+  angular.module("KendoDemos", [ "kendo.directives" ])
+          .controller("MyCtrl", function($scope){
+              $scope.countryNames = [
+                { name: "Albania", id:1 },
+                { name: "Andorra", id:2 }
+              ];
+
+    					$scope.acOptions = {
+               	dataTextField: "name",
+                dataValueField: "id",
+                select: function(e) {
+          				var dataItem = this.dataItem(e.item.index());
+          				alert(dataItem.id);
+
+        				},
+                change: function(e){
+                  console.log(e);
+                  //e.sender.value(dataItem.id);
+                }
+              }
+          })
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Repositories.dll.config
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Repositories.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Repositories.pdb
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Castle.Core.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Castle.Windsor.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\EntityFramework.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Castle.Core.xml
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\Castle.Windsor.xml
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\EntityFramework.xml
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\obj\Debug\Repositories.csprojResolveAssemblyReference.cache
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\obj\Debug\Repositories.dll
+C:\Users\Henya\OneDrive\Documents\Boston University\MET CS651 A1 Web Development with .NET\Project\Nutrition\Repositories\obj\Debug\Repositories.pdb

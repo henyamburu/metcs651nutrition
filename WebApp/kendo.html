@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <base href="http://demos.telerik.com/kendo-ui/autocomplete/angular">
+    <style>
+        html {
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+    <title>Ticket ID: 906308</title>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1411/styles/kendo.dataviz.default.min.css" />
+
+    <script src="http://cdn.kendostatic.com/2014.3.1411/js/jquery.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.3.1411/js/kendo.all.min.js"></script>
+    <script type="text/javascript">
+        var internetUsers = [{
+            "country": "United States",
+            "year": "2005",
+            "value": 67.96
+        }, {
+            "country": "United",
+            "year": "2006",
+            "value": 68.93
+        }];
+
+        var pricePerformance = [{
+            "date": new Date("12-13-2015"),
+            "calories": 461,
+            "name": 'Meal Calories'
+        }, {
+            "date": new Date("12-12-2015"),
+            "calories": 9,
+            "name": 'Meal Calories'
+        }, {
+            "date": new Date("12-13-2015"),
+            "calories": 345,
+            "name": 'Profile Calories'
+        }, {
+            "date": new Date("12-12-2015"),
+            "calories": 43,
+            "name": 'Profile Calories'
+        }];
+
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Today's Calories"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "scatterLine",
+                    style: "smooth",
+                    markers: {
+                        size: 6
+                    }
+                },
+                dataSource: {
+                    data: pricePerformance,
+                    group: {
+                        field: "name"
+                    }
+                },
+                series: [{
+                    xField: "date",
+                    yField: "calories"
+                }],                
+                tooltip: {
+                    visible: true,
+                    template: "#= '<b>' + value.x + ' / ' + dataItem.name + ': ' + value.y + '</b>' #"
+                }
+            })
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</head>
+<body>
+    <div id="chart"></div>
+</body>
+</html>

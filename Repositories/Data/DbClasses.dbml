@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Nutrition" Class="DbClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=dunwauh05r.database.windows.net;Initial Catalog=Nutrition;User ID=NutritionUser;Connect Timeout=60" SettingsObjectName="Repositories.Properties.Settings" SettingsPropertyName="NutritionConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.USDA_FD_GROUP" Member="FoodGroups">
+    <Type Name="FoodGroup">
+      <Column Name="FdGrp_Cd" Member="Id" Storage="_FdGrp_Cd" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FdGrp_Desc" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Association Name="FoodGroup_Food" Member="Foods" Storage="_USDA_FOOD_DEs" AccessModifier="Internal" ThisKey="Id" OtherKey="FdGrp_Cd" Type="Food" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USDA_FOOD_DES" Member="Foods">
+    <Type Name="Food">
+      <Column Name="NDB_No" Member="Id" Storage="_NDB_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FdGrp_Cd" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Long_Desc" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Shrt_Desc" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="Refuse" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="N_Factor" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="Pro_Factor" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="Fat_Factor" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="CHO_Factor" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Association Name="Food_Weight" Member="Weights" Storage="_USDA_WEIGHTs" AccessModifier="Internal" ThisKey="Id" OtherKey="Id" Type="Weight" />
+      <Association Name="Food_History" Member="Histories" AccessModifier="Internal" ThisKey="Id" OtherKey="NDB_No" Type="History" />
+      <Association Name="FoodGroup_Food" Member="FoodGroup" Storage="_USDA_FD_GROUP" ThisKey="FdGrp_Cd" OtherKey="Id" Type="FoodGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.USDA_WEIGHT" Member="Weights">
+    <Type Name="Weight">
+      <Column Name="NDB_No" Member="Id" Storage="_NDB_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Seq" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(5,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Msre_Desc" Type="System.String" DbType="NVarChar(84) NOT NULL" CanBeNull="false" />
+      <Column Name="Gm_Wgt" Type="System.Decimal" DbType="Decimal(7,1) NOT NULL" CanBeNull="false" />
+      <Association Name="Food_Weight" Member="Food" Storage="_USDA_FOOD_DE" ThisKey="Id" OtherKey="Id" Type="Food" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NUT_USER" Member="Users">
+    <Type Name="User">
+      <Column Name="USER_No" Member="Id" Storage="_USER_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(160) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(160) NOT NULL" CanBeNull="false" />
+      <Association Name="User_History" Member="Histories" AccessModifier="Internal" ThisKey="Id" OtherKey="USER_No" Type="History" />
+      <Association Name="User_NUT_PROFILE" Member="Profiles" AccessModifier="Internal" ThisKey="Id" OtherKey="USER_No" Type="Profile" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NUT_HISTORY" Member="Histories">
+    <Type Name="History">
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USER_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="NDB_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Seq" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Food_Amount" Type="System.Decimal" DbType="Decimal(16,14) NOT NULL" CanBeNull="false" />
+      <Column Name="Meal_Calorie" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Meal_Time" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Add_Date" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Food_History" Member="Food" ThisKey="NDB_No" OtherKey="Id" Type="Food" IsForeignKey="true" />
+      <Association Name="User_History" Member="User" ThisKey="USER_No" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NUT_PROFILE" Member="Profiles">
+    <Type Name="Profile">
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="USER_No" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Height" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="HeightUnit" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Weight" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="WeightUnit" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Age" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Calc_Calorie" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Expc_Calorie" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BMR" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="BMI" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Activity" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Add_Date" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="User_NUT_PROFILE" Member="User" ThisKey="USER_No" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
